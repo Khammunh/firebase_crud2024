@@ -1,4 +1,5 @@
 import 'package:firebase/page/home.dart';
+import 'package:firebase/page/read_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -16,9 +17,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage()
-    );
+    return const MaterialApp(debugShowCheckedModeBanner: false, home: ReadData()
+        // home: HomePage()
+        );
   }
 }
