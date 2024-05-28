@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/page/database.dart';
 import 'package:firebase/page/home.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ReadData extends StatefulWidget {
   const ReadData({super.key});
@@ -125,6 +126,42 @@ class _ReadDataState extends State<ReadData> {
                     child: const Center(
                       child: Text(
                         'Update',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              GestureDetector(
+                onTap: () async {
+                  await searchUser(textController.text);
+                  await DatabaseMethods().DeleteUserData(id!);
+
+                  Fluttertoast.showToast(
+                      msg: "User Data Deleted Successfully",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                },
+                child: Center(
+                  child: Container(
+                    width: 150,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Delete',
                         style: TextStyle(
                           fontSize: 20.0,
                           color: Colors.white,

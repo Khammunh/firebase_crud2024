@@ -9,21 +9,36 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-uploadData() async {
+void uploadData(BuildContext context) async {
   Map<String, dynamic> uploadDataUser = {
     'FirstName': firstNameController.text,
     'LastName': lastNameController.text,
     'Age': ageController.text,
   };
-  await DatabaseMethods().addUserDetails(uploadDataUser);
-  Fluttertoast.showToast(
+
+  try {
+    await DatabaseMethods().addUserDetails(uploadDataUser);
+    Fluttertoast.showToast(
       msg: "Data Uploaded Successfully",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.red,
       textColor: Colors.white,
-      fontSize: 16.0);
+      fontSize: 16.0,
+    );
+    Navigator.pop(context);
+  } catch (e) {
+    Fluttertoast.showToast(
+      msg: "Error: $e",
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
 }
 
 TextEditingController firstNameController = TextEditingController();
@@ -163,7 +178,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 90),
               GestureDetector(
                 onTap: () {
-                  uploadData();
+                  uploadData(context);
                 },
                 child: Center(
                   child: Container(

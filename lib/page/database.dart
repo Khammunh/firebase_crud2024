@@ -21,4 +21,11 @@ class DatabaseMethods {
         .doc(id)
         .update({"Age": age});
   }
+
+  Future DeleteUserData(String id) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .doc(id)
+        .delete();
+  }
 }
